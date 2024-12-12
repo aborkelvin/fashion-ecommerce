@@ -1,5 +1,5 @@
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import PrimaryBtn from "../PrimaryBtn/PrimaryBtn";
 
 interface ArticleCardProps {
     image: string;
@@ -21,10 +21,7 @@ export default function ArticleCard({ image, title }: ArticleCardProps) {
                 <h3 className="text-[#23262F] font-semibold lg:text-xl" >
                     {title}
                 </h3>
-                <button className="w-fit text-black-200 font-medium py-1 text-sm lg:text-base flex gap-1 items-center border-b border-b-black-200" >
-                    <span>Read More</span>
-                    <ArrowRight size={16} color="#6C7275" />
-                </button>
+                <PrimaryBtn name="Read More" arrowColor="#6C7275" />
             </div>
         </div>
     )

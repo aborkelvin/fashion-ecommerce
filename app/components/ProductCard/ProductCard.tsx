@@ -38,14 +38,14 @@ const ProductCard = ({ image, title, price, rating }:ProductCardProps) => {
             </div>
             <div className="mt-4">                                
                 <div className="flex items-center mb-1">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(5)].map((i) => (
                         <svg
                             key={i}
                             className={`h-4 w-4 ${
                                 i < rating.rate ? "text-black-300" : "text-gray-300"
                             }`}
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
                         >
                             <path d="M12 .587l3.668 7.431 8.332 1.21-6.045 5.884 1.425 8.302L12 18.896l-7.38 3.865 1.425-8.302L0 9.228l8.332-1.21z" />
                         </svg>

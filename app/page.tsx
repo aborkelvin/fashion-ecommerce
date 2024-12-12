@@ -10,6 +10,12 @@ import ArticleCard from "./components/Articles/Article";
 import { Mail } from "lucide-react";
 import Image from "next/image";
 
+enum ScrollPosition {
+    Left = "left",
+    Middle = "middle",
+    Right = "right",
+}
+
 export default function Home() {
 
     const [products, setProducts] = useState<ProductCardProps[]>([])
@@ -102,46 +108,24 @@ export default function Home() {
     const handleBlur = () => setInputIsFocused(false);
     
 
-    // Handle Scroll state for featured products
-    // States to track the scroll position
-    const [scrollPosition, setScrollPosition] = useState('middle'); // 'left', 'right', or 'middle'
-
-    // Ref to the scrolling container
+    // Handle Scroll indicator for featured products    
+    const [scrollPosition, setScrollPosition] = useState<ScrollPosition>(ScrollPosition.Middle);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-
     const handleScroll = () => {
         if (!scrollContainerRef.current) return;
-
         const container = scrollContainerRef.current;
         const scrollLeft = container.scrollLeft;
         const scrollWidth = container.scrollWidth;
         const clientWidth = container.clientWidth;
 
         if (scrollLeft === 0) {
-            setScrollPosition('left');
+            setScrollPosition(ScrollPosition.Left);
         } else if (Math.ceil(scrollLeft + clientWidth) >= Math.floor(scrollWidth)) {
-            setScrollPosition('right');
+            setScrollPosition(ScrollPosition.Right);
         } else {            
-            setScrollPosition('middle');
+            setScrollPosition(ScrollPosition.Middle);
         }
     };
-
-    /* useEffect(() => {
-        // Add scroll event listener
-        const container = scrollContainerRef.current;
-        if (container) {
-            container.addEventListener('scroll', handleScroll);
-        }
-
-        // Cleanup the event listener on unmount
-        return () => {
-            if (container) {
-                container.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, []); */
-
-
 
     return (
         <main>

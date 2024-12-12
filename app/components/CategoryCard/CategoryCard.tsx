@@ -6,7 +6,7 @@ export interface CategoryCardProps {
 
 const CategoryCard = ({ image, label }:CategoryCardProps) => {
   return (
-    <div className="flex flex-col gap-6 items-center hover:shadow-xs cursor-pointer transition duration-300">
+    <div className="flex flex-col gap-6 items-center hover:shadow-md cursor-pointer transition duration-300">
       <div className="relative w-full">
         <img
           src={image}
