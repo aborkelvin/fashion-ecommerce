@@ -66,7 +66,7 @@ export default function Header() {
             </nav>
 
             {/* Mobile Navigation Menu */}
-            { <nav className={`${isMobileMenuOpen? "" : "-top-[500%]"} absolute top-full left-0 w-full bg-white shadow-md lg:hidden z-20 transition-all duration-1000`}>
+            { isMobileMenuOpen && <nav className={`${isMobileMenuOpen? "" : "-top-[500%]"} absolute top-full left-0 w-full bg-white shadow-md lg:hidden z-20 transition-all duration-1000`}>
                 <ul className="flex flex-col space-y-4 py-4 px-4 phones:px-8 md:px-16">
                     {navLinks.map((navLink, index) => (
                         <NavigationLink href={navLink.href} className={index == 1 || index == 2 ? "flex items-center gap-0.5":"text-base"} key={index} >                            
@@ -75,7 +75,7 @@ export default function Header() {
                         </NavigationLink>
                     ))}
                 </ul>
-            </nav>            }
+            </nav> }
 
             {/* Icons */}            
             <div className="flex items-center gap-[18px]">

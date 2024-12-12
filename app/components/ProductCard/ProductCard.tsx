@@ -1,6 +1,7 @@
 "use client";
 
 import { addToCart } from "@/app/store/slices/cartSlice";
+import { useId } from "react";
 import { useDispatch } from "react-redux";
 
 export interface ProductCardProps {
@@ -53,7 +54,7 @@ const ProductCard = ({ image, title, price, rating }: ProductCardProps) => {
                 <div className="flex items-center mb-1">
                     {[...Array(5)].map((index) => (
                         <svg
-                            key={index}
+                            key={useId()}
                             className={`h-4 w-4 ${
                                 index < rating.rate ? "text-black-300" : "text-gray-300"
                             }`}
