@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Header() {
     
     return (
-        <header className="bg-white flex justify-between items-center py-4 px-8 md:px-16 xl:px-[160px]">
+        <header className="bg-white flex justify-between items-center py-4 px-4 phones:px-8 md:px-16 xl:px-[160px]">
             <div className="hidden lg:block">
                 <Link href="/" className="text-2xl font-medium font-Poppins">idowucouture</Link>
             </div>

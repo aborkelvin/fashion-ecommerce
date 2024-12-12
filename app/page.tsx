@@ -57,7 +57,7 @@ export default function Home() {
 
     const articles = [
         {
-            image: '/images/air-jordan.png',
+            image: '/images/air-jordan2.png',
             title: 'Air Jordan x Travis Scott Event', 
         },
         {
@@ -94,11 +94,15 @@ export default function Home() {
 
         fetchProducts();
     }, []);
+
+    const [inputIsFocused, setInputIsFocused] = useState(false);
+    const handleFocus = () => setInputIsFocused(true);
+    const handleBlur = () => setInputIsFocused(false);
     
     return (
         <main>
             {/* Hero Section */}
-            <div className="hero relative flex items-end lg:items-center justify-center h-screen py-10 px-8 md:px-16 xl:px-[160px]">
+            <div className="hero relative flex items-end lg:items-center justify-center h-screen py-10 px-4 phones:px-8 md:px-16 xl:px-[160px]">
                 <picture>
                     <source srcSet="/images/hero.png" media="(min-width: 1024px)" />
                     <source srcSet="/images/hero-mobile.png" media="(max-width: 1023px)" />
@@ -126,7 +130,7 @@ export default function Home() {
                 </div>
             </div>
                         
-            <div className="space-y-16 py-10 px-8 md:px-16 xl:px-[160px] lg:mb-10">
+            <div className="space-y-16 py-10 px-4 phones:px-8 md:px-16 xl:px-[160px] lg:mb-10">
                 {/* Featured Products Section */}
                 <section>
                     <h2 className="text-[34px] lg:text-[40px] font-Poppins font-medium mb-5 lg:mb-9">Featured</h2>
@@ -164,7 +168,7 @@ export default function Home() {
 
             
             {/* Shop Collection */}
-            <div className=" py-10 px-8 md:px-16 xl:px-[160px]">
+            <div className=" py-10 px-4 phones:px-8 md:px-16 xl:px-[160px]">
                 <h2 className="text-[34px] lg:text-[40px] font-Poppins font-medium mb-5 lg:mb-9 text-center lg:text-left">Shop Collection</h2>
                  <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-6">
                     {collections.map((collection, index) => (
@@ -179,7 +183,7 @@ export default function Home() {
             </div>
 
             {/* Articles Section */}
-            <div className=" py-10 px-8 md:px-16 xl:px-[160px]">
+            <div className=" py-10 px-4 phones:px-8 md:px-16 xl:px-[160px]">
                 <div className="flex justify-between items-center mb-10">
                     <h2 className="text-[30px] lg:text-[40px] font-Poppins font-medium">Latest Articles</h2>
                     <PrimaryBtn name="View More" />
@@ -197,7 +201,7 @@ export default function Home() {
 
             {/* Newsletter Section */}
             <div
-                className="bg-black-100 lg:bg-[url('/images/hero-2-bg.png')] bg-no-repeat bg-cover bg-center w-full px-8 py-[95px] 
+                className="bg-black-100 lg:bg-[url('/images/hero-2-bg.png')] bg-no-repeat bg-cover bg-center w-full px-4 phones:px-8 py-[95px] 
                 flex flex-col justify-center items-center text-center text-[#FEFEFE]"
             >
                 <div className="w-full md:max-w-[50%] lg:max-w-[35%]">
@@ -205,14 +209,18 @@ export default function Home() {
                     <p className="text-sm lg:text-lg mb-6">
                         Sign up for deals, new products and promotions
                     </p>
-                    <div className="relative text-[#FEFEFE] " >
+                    <div className="relative text-[#FEFEFE]" >
                         <input
                             type="email"
                             name=""
                             id=""                            
-                            className="border-b border-b-[#FEFEFE] bg-transparent w-full py-2 px-6 lg:py-3 lg:px-6 focus:outline-none group"
+                            className="border-b border-b-[#FEFEFE] bg-transparent w-full py-2 px-1 lg:py-3 focus:outline-none"
+                            onFocus={handleFocus}
+                            onBlur={handleBlur}
                         />
-                        <div className="flex gap-3 absolute top-1/2 left-0 transform -translate-y-1/2 group-focus:hidden " >
+                        <div
+                             className={`flex gap-3 absolute top-1/2 left-0 transform -translate-y-1/2 ${inputIsFocused ? 'hidden' : ''}`}
+                        >
                             <Mail size={24} color="#FEFEFE" className="" />
                             <span className="relative lg:top-0.5">Email address</span>
                         </div>             
@@ -224,25 +232,23 @@ export default function Home() {
             </div>
 
             {/* Social Media Section */}
-            <div className="py-10 px-8 flex flex-col gap-2 lg:gap-3 text-center">
+            <div className="py-10 px-4 phones:px-8 flex flex-col gap-2 lg:gap-3 text-center">
                 <h4 className="font-bold text-[#6C7275]" >NEWSFEED</h4>
                 <h5 className="text-[34px] lg:text-[40px] font-Poppins text-black-200 font-medium" >Instagram</h5>
                 <p className="text-sm lg:text-xl text-black-100">Follow us on social media for more discount & promotions</p>
                 <span className="text-xl text-[#6C7275] font-medium font-Poppins" >@3legant_official</span>
-            </div>
-            {/* <div className="flex gap-3 overflow-scroll"> */}
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-0">
-            {/* <div className="flex flex-wrap"> */}
-                {/* {gamesImages.map((image, index) => (
+            </div>            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-0">
+                {gamesImages.map((image, index) => (
                     <Image
                         key={index}
                         src={image}
                         width={188}
                         height={188}
-                        alt="Social media"
-                        className="object-cover"
+                        alt="Image of golf player"
+                        className="object-cover w-full h-full"
                     />
-                ))} */}
+                ))}
             </div>
 
         </main>
