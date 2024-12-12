@@ -1,3 +1,8 @@
+"use client";
+
+import { addToCart } from "@/app/store/slices/cartSlice";
+import { useDispatch } from "react-redux";
+
 export interface ProductCardProps {
     id?: number;
     image: string;
@@ -12,7 +17,14 @@ export interface ProductCardProps {
 }
 
 
-const ProductCard = ({ image, title, price, rating }:ProductCardProps) => {
+const ProductCard = ({ image, title, price, rating }: ProductCardProps) => {
+    
+    const dispatch = useDispatch();
+
+    const handleAddToCart = () => {
+        dispatch(addToCart());
+    }
+
     return (
         <div className="hover:shadow-sm cursor-pointer transition duration-300 min-w-[231px] lg:min-w-[261px] group">
             <div className="relative w-full h-[308px] lg:h-[349px] bg-primary-grey flex items-center justify-center">
@@ -30,19 +42,20 @@ const ProductCard = ({ image, title, price, rating }:ProductCardProps) => {
                     className="w-[50%] h-[50%] object-contain"
                 />
                 <button className="bg-black-100 text-[#FEFEFE] rounded-lg font-medium py-3 absolute bottom-3.5 lg:bottom-4 inset-x-3.5 lg:inset-x-4
-                    hidden group-hover:block transition duration-300
-                "
+                    lg:hidden lg:group-hover:block transition duration-300
+                    "
+                    onClick={handleAddToCart}
                 >
                     Add to cart
                 </button>
             </div>
             <div className="mt-4">                                
                 <div className="flex items-center mb-1">
-                    {[...Array(5)].map((i) => (
+                    {[...Array(5)].map((index) => (
                         <svg
-                            key={i}
+                            key={index}
                             className={`h-4 w-4 ${
-                                i < rating.rate ? "text-black-300" : "text-gray-300"
+                                index < rating.rate ? "text-black-300" : "text-gray-300"
                             }`}
                             fill="currentColor"
                             viewBox="0 0 24 24"

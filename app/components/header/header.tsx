@@ -1,17 +1,18 @@
 "use client";
 
+import { RootState } from "@/app/store/store";
 import { ChevronDown, Menu, Search, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    const toggleMobileMenu = () => {
+    const toggleMobileMenu = () => {       
         setIsMobileMenuOpen((prevState) => !prevState);
     };
-
     const navLinks = [
         {
             href: "/",
@@ -31,6 +32,8 @@ export default function Header() {
         },
     ];
 
+    const cartCount = useSelector((state:RootState) => state.cart.count);
+
     return (
         <header className="bg-white flex justify-between items-center py-4 px-4 phones:px-8 md:px-16 xl:px-[160px] relative">
             {/* Logo and Menu Icon */}
@@ -43,6 +46,7 @@ export default function Header() {
                     className="cursor-pointer"
                     role="button"
                     tabIndex={2}
+                    /* aria-label="Menu" */
                     onClick={toggleMobileMenu}
                 />
                 <Link href="/" className="font-medium font-Poppins relative top-[1px]">3legant.</Link>
@@ -62,7 +66,7 @@ export default function Header() {
             </nav>
 
             {/* Mobile Navigation Menu */}
-            <nav className={`${isMobileMenuOpen? "" : "-top-[500%]"} absolute top-full left-0 w-full bg-white shadow-md lg:hidden z-20 transition-all duration-1000`}>                    
+            { <nav className={`${isMobileMenuOpen? "" : "-top-[500%]"} absolute top-full left-0 w-full bg-white shadow-md lg:hidden z-20 transition-all duration-1000`}>
                 <ul className="flex flex-col space-y-4 py-4 px-4 phones:px-8 md:px-16">
                     {navLinks.map((navLink, index) => (
                         <NavigationLink href={navLink.href} className={index == 1 || index == 2 ? "flex items-center gap-0.5":"text-base"} key={index} >                            
@@ -71,7 +75,7 @@ export default function Header() {
                         </NavigationLink>
                     ))}
                 </ul>
-            </nav>            
+            </nav>            }
 
             {/* Icons */}            
             <div className="flex items-center gap-[18px]">
@@ -98,7 +102,7 @@ export default function Header() {
                         className="cursor-pointer"
                     />
                     <div className="w-6 h-6 bg-black-100 rounded-full flex items-center justify-center text-white text-[10px] font-bold">
-                        2
+                        {cartCount}
                     </div>
                 </div>
             </div>
