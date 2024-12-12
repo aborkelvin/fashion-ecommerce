@@ -25,8 +25,11 @@ const config: Config = {
       },
       colors: {
         'primary-green': '#38CB89',
+        'primary-grey': '#F3F5F7',
+        'secondary-grey': '#6C7275',
         'black-100': '#141718',
         'black-200': '#121212',
+        'black-300': '#343839',
       },
       fontFamily: {
         Poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
