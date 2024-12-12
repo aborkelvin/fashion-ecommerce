@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function DiscountNotification() {
     const [show, setShow] = useState(true);
     return (
-        <div className={` ${show ? "" : "hidden"} bg-primary-green p-3 lg:p-2 flex items-center justify-center gap-3 relative`}>
+        <div className={` ${show ? "" : "hidden"} bg-primary-green p-3 lg:p-2 flex items-center justify-center gap-3 relative z-50`}>
             
             {/* Or use ticket percent from lucide-react */}
             <Image

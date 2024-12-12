@@ -7,7 +7,7 @@ interface TimeLeft {
   seconds: number;
 }
 
-const CountdownSection = () => {
+export default function CountdownSection(){
 
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 2); // Set target date 2 days from now
@@ -22,7 +22,6 @@ const CountdownSection = () => {
             minutes: 0,
             seconds: 0,
         };
-
         if (difference > 0) {
         timeLeft = {
             days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -78,5 +77,3 @@ const CountdownSection = () => {
         </div>
   );
 };
-
-export default CountdownSection;

@@ -31,6 +31,64 @@ export default function Footer() {
         },
     ]
 
+    const pageLinks = [
+        {
+            title: 'Page',
+            links: [
+                {
+                    href: '/',
+                    label: 'Home'
+                },
+                {
+                    href: '/',
+                    label: 'Shop'
+                },
+                {
+                    href: '/',
+                    label: 'Product'
+                },
+                {
+                    href: '/',
+                    label: 'Articles'
+                },
+                {
+                    href: '/',
+                    label: 'Contact Us'
+                },
+            ]
+        },
+        {
+            title: 'Info',
+            links: [
+                {
+                    href: '/',
+                    label: 'Shipping Policy'
+                },
+                {
+                    href: '/',
+                    label: 'Return & Refund'
+                },
+                {
+                    href: '/',
+                    label: 'Support'
+                },
+                {
+                    href: '/',
+                    label: 'FAQs'
+                },
+            ]
+        },
+        {
+            title: 'Office',
+            labels:[
+                '43111 Hai Trieu street,',
+                'District 1, HCMC',
+                'Vietnam',
+                '84-756-3237'            
+            ]
+        },
+    ]
+
     return (
         <div className="bg-black-100 lg:bg-black px-4 phones:px-8 py-14 lg:py-20 lg:px-[160px] flex flex-col gap-16">
             
@@ -54,11 +112,11 @@ export default function Footer() {
                             <ChevronUp size={16} className="md:hidden" />
                         </div>
                         <div className="flex flex-col gap-6 text-white text-sm font-medium">
-                            <Link href="/" className="" >Home</Link>
-                            <Link href="/" className="" >Shop</Link>
-                            <Link href="/" className="" >Product</Link>
-                            <Link href="/" className="" >Articles</Link>
-                            <Link href="/" className="" >Contact Us</Link>
+                            {
+                                pageLinks[0].links?.map((link, index) => (
+                                    <Link key={index} href={link.href} className="" >{link.label}</Link>
+                                ))
+                            }
                         </div>
                     </div>
                     <div className="flex flex-col gap-6 md:gap-10 text-[#FEFEFE] border-b border-b-[#6C7275] md:border-none pb-8">
@@ -66,20 +124,22 @@ export default function Footer() {
                             <h6 className="font-medium" >Info</h6>
                             <ChevronUp size={16} className="md:hidden" />
                         </div>
-                        <div className="flex flex-col gap-6 text-white text-sm font-medium">
-                            <Link href="/" className="" >Shipping Policy</Link>
-                            <Link href="/" className="" >Return & Refund</Link>
-                            <Link href="/" className="" >Support</Link>
-                            <Link href="/" className="" >FAQs</Link>
+                        <div className="flex flex-col gap-6 text-white text-sm font-medium">                            
+                            {
+                                pageLinks[1].links?.map((link, index) => (
+                                    <Link key={index} href={link.href} className="" >{link.label}</Link>
+                                ))
+                            }
                         </div>
                     </div>
                     <div className="flex flex-col gap-6 md:gap-10 text-[#FEFEFE] pb-8">
                         <h6 className="font-medium" >Office</h6>
-                        <div className="flex flex-col gap-6 text-white text-sm">
-                            <span>43111 Hai Trieu street,</span>
-                            <span>District 1, HCMC</span>
-                            <span>Vietnam</span>
-                            <span>84-756-3237</span>
+                        <div className="flex flex-col gap-6 text-white text-sm">                            
+                            {
+                                pageLinks[2].labels?.map((label, index) => (
+                                    <span key={index}>{label}</span>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
