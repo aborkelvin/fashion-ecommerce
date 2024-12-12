@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProductCard, { ProductCardProps } from "./components/ProductCard/ProductCard";
 import CategoryCard from "./components/CategoryCard/CategoryCard";
 import CountdownSection from "./components/CountDownSection/CountDownSection";
@@ -95,10 +95,54 @@ export default function Home() {
         fetchProducts();
     }, []);
 
+    
+    // Newsletter input focus state
     const [inputIsFocused, setInputIsFocused] = useState(false);
     const handleFocus = () => setInputIsFocused(true);
     const handleBlur = () => setInputIsFocused(false);
     
+
+    // Handle Scroll state for featured products
+    // States to track the scroll position
+    const [scrollPosition, setScrollPosition] = useState('middle'); // 'left', 'right', or 'middle'
+
+    // Ref to the scrolling container
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    const handleScroll = () => {
+        if (!scrollContainerRef.current) return;
+
+        const container = scrollContainerRef.current;
+        const scrollLeft = container.scrollLeft;
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+
+        if (scrollLeft === 0) {
+            setScrollPosition('left');
+        } else if (Math.ceil(scrollLeft + clientWidth) >= Math.floor(scrollWidth)) {
+            setScrollPosition('right');
+        } else {            
+            setScrollPosition('middle');
+        }
+    };
+
+    /* useEffect(() => {
+        // Add scroll event listener
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener('scroll', handleScroll);
+        }
+
+        // Cleanup the event listener on unmount
+        return () => {
+            if (container) {
+                container.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, []); */
+
+
+
     return (
         <main>
             {/* Hero Section */}
@@ -133,9 +177,30 @@ export default function Home() {
             <div className="space-y-16 py-10 px-4 phones:px-8 md:px-16 xl:px-[160px] lg:mb-10">
                 {/* Featured Products Section */}
                 <section>
-                    <h2 className="text-[34px] lg:text-[40px] font-Poppins font-medium mb-5 lg:mb-9">Featured</h2>
-                    {/* <div className="grid gap-5 md:gap-6 lg:gap-10 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]"> */}
-                    <div className="flex gap-5 md:gap-6 lg:gap-10 overflow-scroll" >
+                    <div className="flex justify-between gap-1 items-center mb-5 lg:mb-9">
+                        <h2 className="text-[34px] lg:text-[40px] font-Poppins font-medium">Featured</h2>
+                        <div className="flex items-center gap-2" >
+                            {/* Display scroll indicator */}
+                            {
+                                ["left","middle","right"].map((item,index) => (
+                                    <Image
+                                        key={index}
+                                        src={
+                                            scrollPosition === item
+                                                ? '/images/scroll/active-scroll.svg'
+                                                : '/images/scroll/inactive-scroll.svg'
+                                        }
+                                        width={scrollPosition === item ? 16 : 8}
+                                        height={scrollPosition === item ? 16 : 8}
+                                        alt="Scroll indicator"
+                                    />
+                                ))
+                            }    
+                        </div>
+                    </div>                    
+                    <div className="flex gap-5 md:gap-6 lg:gap-10 overflow-scroll scrollContainer" ref={scrollContainerRef}
+                        onScroll={handleScroll}
+                    >
                         {products.map((product) => (
                             <ProductCard
                                 key={product.id}
