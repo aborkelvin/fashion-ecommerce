@@ -74,7 +74,9 @@ const OTPPage = () => {
             const result = await response.json();
             console.log(result);
             if (result.status === 200) {
-                toast.success("OTP sent successfully!");
+                toast.success(`OTP sent successfully!Otp: ${result.data.otp}`, {
+                    duration:10000
+                });
             } else {
                 toast.error(result.data);
             }

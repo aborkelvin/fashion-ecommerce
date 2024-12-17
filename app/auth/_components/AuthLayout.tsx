@@ -92,7 +92,9 @@ const AuthLayout = ({ page }: { page: "login" | "signup" }) => {
                     localStorage.setItem("token", result.data.token);
                     router.push("/");
                 } else {
-                    toast.success("Success! Please check your email for verification");
+                    toast.success(`Success! Please check your email for otp. Otp: ${result.data.otp}`, {
+                        duration:10000
+                    } );
                     router.push(`/auth/verify-email?email=${formData.email}`);
                 }
             } else if (result.status == 403) {
