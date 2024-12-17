@@ -10,9 +10,6 @@ import ArticleCard from "../components/Articles/Article";
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import { useRouter } from "next/navigation";
 
 enum ScrollPosition {
     Left = "left",
@@ -21,17 +18,6 @@ enum ScrollPosition {
 }
 
 const Home = () =>  {
-
-    const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-    const router = useRouter();
-
-    useEffect(() => {
-        if (!isAuthenticated) {
-            router.push("/auth/login");
-        }
-    }, [isAuthenticated, router]);
-
-    if (!isAuthenticated) return null;
 
     const [products, setProducts] = useState<ProductCardProps[]>([])
     const categories = [
@@ -99,7 +85,7 @@ const Home = () =>  {
         '/images/games/social5.png',
         '/images/games/social6.png',
     ]
-    
+
 
     // Fetch products from FakeStore API to demonstrate api consumption
     useEffect(() => {
@@ -319,5 +305,5 @@ const Home = () =>  {
     )
 }
 
-export default Home;
+export default PrivateRoute(Home);
 //export default Home;
