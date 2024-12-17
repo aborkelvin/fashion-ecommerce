@@ -95,11 +95,10 @@ const AuthLayout = ({ page }: { page: "login" | "signup" }) => {
                     toast.success("Success! Please check your email for verification");
                     router.push(`/auth/verify-email?email=${formData.email}`);
                 }
-            } else {
-                if (page == "signup") {
-                    toast.error(result.message);
-                }
-                toast.error(result.data)
+            } else if (result.status == 403) {
+                toast.error(result.data);
+            }else{
+                page == "signup"? toast.error(result.message) : toast.error("Invalid credentials");
             }
             
         } catch (error) {
