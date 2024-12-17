@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { error } from 'console';
+import { persistor } from '../store';
 
 
 // TODO: Remove the loading and error fields from the state and the loginStart and loginFailure reducers.
-
 interface AuthState {
-    user: null | { name: string; email: string };
+    user: null | { name: string; email: string, username: string };
     token: null | string;
     isAuthenticated: boolean;
     loading: boolean;
@@ -42,6 +42,7 @@ const authSlice = createSlice({
             state.user = null;
             state.token = null;
             state.isAuthenticated = false;
+            persistor.purge(); // Clear persisted state
         },
     },
 });

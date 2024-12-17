@@ -305,5 +305,5 @@ const Home = () =>  {
     )
 }
 
-//export default PrivateRoute(Home);
-export default Home;
+export default PrivateRoute(Home);
+//export default Home;
