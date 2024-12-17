@@ -2,14 +2,12 @@
 
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { JSX, useEffect } from 'react';
+import { useEffect, ComponentType } from 'react';
 import { RootState } from '@/app/store/store';
-import { ComponentType } from 'react';
 
-const PrivateRoute = (WrappedComponent: ComponentType) => {
-    
-    return (props: JSX.IntrinsicAttributes) => {
-        const { isAuthenticated } = useSelector((state:RootState) => state.auth);
+const PrivateRoute = <P extends object>(WrappedComponent: ComponentType<P>) => {
+    const AuthenticatedComponent = (props: P) => {
+        const { isAuthenticated } = useSelector((state: RootState) => state.auth);
         const router = useRouter();
 
         useEffect(() => {
@@ -24,6 +22,9 @@ const PrivateRoute = (WrappedComponent: ComponentType) => {
 
         return <WrappedComponent {...props} />;
     };
+
+    return AuthenticatedComponent;
 };
 
 export default PrivateRoute;
+
