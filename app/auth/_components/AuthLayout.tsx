@@ -159,7 +159,7 @@ const AuthLayout = ({ page }: { page: "login" | "signup" }) => {
                             )}
                         </p>
 
-                        <form className="space-y-6 text-secondary-grey" onSubmit={handleSubmit}>
+                        <form className="space-y-6 " onSubmit={handleSubmit}>
                             {page === "signup" && (
                                 <>
                                 <input
