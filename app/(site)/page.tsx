@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import ProductCard, { ProductCardProps } from "./components/ProductCard/ProductCard";
-import CategoryCard from "./components/CategoryCard/CategoryCard";
-import CountdownSection from "./components/CountDownSection/CountDownSection";
-import ShopCollectionCard from "./components/ShopCollectionCard/ShopCollectionCard";
-import PrimaryBtn from "./components/PrimaryBtn/PrimaryBtn";
-import ArticleCard from "./components/Articles/Article";
+import ProductCard, { ProductCardProps } from "../components/ProductCard/ProductCard";
+import CategoryCard from "../components/CategoryCard/CategoryCard";
+import CountdownSection from "../components/CountDownSection/CountDownSection";
+import ShopCollectionCard from "../components/ShopCollectionCard/ShopCollectionCard";
+import PrimaryBtn from "../components/PrimaryBtn/PrimaryBtn";
+import ArticleCard from "../components/Articles/Article";
 import { Mail } from "lucide-react";
 import Image from "next/image";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
 enum ScrollPosition {
     Left = "left",
@@ -16,7 +17,7 @@ enum ScrollPosition {
     Right = "right",
 }
 
-export default function Home() {
+const Home = () =>  {
 
     const [products, setProducts] = useState<ProductCardProps[]>([])
     const categories = [
@@ -303,3 +304,6 @@ export default function Home() {
         </main>
     )
 }
+
+//export default PrivateRoute(Home);
+export default Home;
